@@ -1,0 +1,111 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f2f5;
+  padding: 20px;
+}
+
+.login-card {
+  background: white;
+  border-radius: 8px;
+  padding: 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-icon {
+  margin-bottom: 24px;
+}
+
+h1 {
+  font-size: 24px;
+  color: #1c1e21;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #65676b;
+  margin-bottom: 32px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.feature-item {
+  background: #f7f8fa;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.feature-icon {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.feature-item h3 {
+  font-size: 16px;
+  color: #1877f2;
+  margin-bottom: 4px;
+}
+
+.feature-item p {
+  font-size: 14px;
+  color: #65676b;
+  margin: 0;
+}
+
+.connect-button {
+  background: #1877f2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.connect-button:hover {
+  background: #166fe5;
+}
+
+.connect-button:disabled {
+  background: #e4e6eb;
+  cursor: not-allowed;
+}
+
+.terms {
+  margin-top: 24px;
+  font-size: 12px;
+  color: #65676b;
+}
+
+.terms a {
+  color: #1877f2;
+  text-decoration: none;
+}
+
+.terms a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .login-card {
+    padding: 20px;
+  }
+} 
