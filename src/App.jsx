@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import LoginPage from './components/LoginPage';
-import MainApp from './components/MainApp'; // Your main app component
+import MainApp from './components/MainApp';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
