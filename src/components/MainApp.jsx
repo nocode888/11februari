@@ -6,7 +6,6 @@ import { AdsVisualManager } from './AdsVisualManager';
 import { Workforce } from './Workforce';
 import { AdsCopilot } from './ai/AdsCopilot';
 import { AIChatbot } from './AIChatbot';
-import './MainApp.css';
 
 const MainApp = () => {
   const [activePage, setActivePage] = useState('dashboard');
