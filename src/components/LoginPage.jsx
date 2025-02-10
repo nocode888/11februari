@@ -3,20 +3,35 @@ import './LoginPage.css';
 
 const LoginPage = ({ onLogin }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleConnect = async () => {
     setIsLoading(true);
+    setError(null);
     try {
-      // Here you would implement Meta login logic
-      const metaAppId = import.meta.env.VITE_META_APP_ID;
-      const metaAppToken = import.meta.env.VITE_META_APP_TOKEN;
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      // Initialize Meta SDK
+      window.FB.init({
+        appId: import.meta.env.VITE_META_APP_ID,
+        cookie: true,
+        xfbml: true,
+        version: 'v18.0' // Use the latest version
+      });
+
+      // Login with Facebook
+      await new Promise((resolve, reject) => {
+        window.FB.login((response) => {
+          if (response.authResponse) {
+            resolve(response);
+          } else {
+            reject(new Error('User cancelled login or did not fully authorize.'));
+          }
+        }, { scope: 'public_profile,email,ads_management,ads_read' });
+      });
+
       onLogin?.();
     } catch (error) {
       console.error('Login failed:', error);
+      setError(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -60,6 +75,7 @@ const LoginPage = ({ onLogin }) => {
           </div>
         </div>
 
+        {error && <div className="error-message">{error}</div>}
         <button 
           className="connect-button"
           onClick={handleConnect}
