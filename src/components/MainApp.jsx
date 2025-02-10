@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import Dashboard from '../pages/Dashboard';
-import Research from '../pages/Research';
-import AdsCopilot from '../pages/AdsCopilot';
-import Workforce from '../pages/Workforce';
+import { DashboardHome } from './DashboardHome';
+import { DataIntelligenceCenter } from './DataIntelligenceCenter';
+import { AdsVisualManager } from './AdsVisualManager';
+import { Workforce } from './Workforce';
+import { AdsCopilot } from './ai/AdsCopilot';
+import { AIChatbot } from './AIChatbot';
 import './MainApp.css';
 
 const MainApp = () => {
@@ -12,15 +14,17 @@ const MainApp = () => {
   const renderPage = () => {
     switch (activePage) {
       case 'dashboard':
-        return <Dashboard />;
-      case 'research':
-        return <Research />;
-      case 'adsCopilot':
-        return <AdsCopilot />;
+        return <DashboardHome />;
+      case 'intelligence':
+        return <DataIntelligenceCenter />;
+      case 'visual':
+        return <AdsVisualManager />;
       case 'workforce':
         return <Workforce />;
+      case 'copilot':
+        return <AdsCopilot />;
       default:
-        return <Dashboard />;
+        return <DashboardHome />;
     }
   };
 
@@ -40,17 +44,17 @@ const MainApp = () => {
           </button>
           
           <button 
-            className={`nav-item ${activePage === 'research' ? 'active' : ''}`}
-            onClick={() => setActivePage('research')}
+            className={`nav-item ${activePage === 'intelligence' ? 'active' : ''}`}
+            onClick={() => setActivePage('intelligence')}
           >
-            Research Library
+            Data Intelligence
           </button>
           
           <button 
-            className={`nav-item ${activePage === 'adsCopilot' ? 'active' : ''}`}
-            onClick={() => setActivePage('adsCopilot')}
+            className={`nav-item ${activePage === 'visual' ? 'active' : ''}`}
+            onClick={() => setActivePage('visual')}
           >
-            Ads Copilot
+            Visual Manager
           </button>
           
           <button 
@@ -59,12 +63,27 @@ const MainApp = () => {
           >
             Workforce
           </button>
+
+          <button 
+            className={`nav-item ${activePage === 'copilot' ? 'active' : ''}`}
+            onClick={() => setActivePage('copilot')}
+          >
+            Ads Copilot
+          </button>
         </div>
       </nav>
 
       <main className="main-content">
         {renderPage()}
       </main>
+
+      {/* AI Chatbot akan selalu tersedia di semua halaman */}
+      <AIChatbot 
+        type="audience"
+        onInterestsGenerated={(interests) => {
+          console.log('Generated interests:', interests);
+        }}
+      />
     </div>
   );
 };
