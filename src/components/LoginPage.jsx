@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import './LoginPage.css';
 
 const LoginPage = ({ onLogin }) => {
@@ -38,60 +39,128 @@ const LoginPage = ({ onLogin }) => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-card">
-        <div className="login-icon">
+    <motion.div 
+      className="login-container"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div 
+        className="login-card"
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+      >
+        <motion.div 
+          className="login-icon"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
           <svg viewBox="0 0 24 24" width="48" height="48">
             <path fill="#4267B2" d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-1 16H6a1 1 0 01-1-1V6a1 1 0 011-1h12a1 1 0 011 1v12a1 1 0 01-1 1z"/>
           </svg>
-        </div>
+        </motion.div>
         
-        <h1>Welcome to Audience Explorer</h1>
-        <p className="subtitle">Connect your Meta account to get started</p>
+        <motion.h1
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          Welcome to Audience Explorer
+        </motion.h1>
+        
+        <motion.p 
+          className="subtitle"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.4 }}
+        >
+          Connect your Meta account to get started
+        </motion.p>
 
-        <div className="features-grid">
-          <div className="feature-item">
-            <div className="feature-icon">📊</div>
-            <h3>Ad Insights</h3>
-            <p>Analyze your ad performance</p>
-          </div>
-          
-          <div className="feature-item">
-            <div className="feature-icon">👥</div>
-            <h3>Audience Data</h3>
-            <p>Understand your audience</p>
-          </div>
-          
-          <div className="feature-item">
-            <div className="feature-icon">🤖</div>
-            <h3>AI Analysis</h3>
-            <p>Get AI-powered recommendations</p>
-          </div>
-          
-          <div className="feature-item">
-            <div className="feature-icon">💬</div>
-            <h3>Comment Analysis</h3>
-            <p>Track engagement metrics</p>
-          </div>
-        </div>
+        <motion.div 
+          className="features-grid"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          {[
+            { icon: '📊', title: 'Ad Insights', desc: 'Analyze your ad performance' },
+            { icon: '👥', title: 'Audience Data', desc: 'Understand your audience' },
+            { icon: '🤖', title: 'AI Analysis', desc: 'Get AI-powered recommendations' },
+            { icon: '💬', title: 'Comment Analysis', desc: 'Track engagement metrics' }
+          ].map((feature, index) => (
+            <motion.div 
+              key={feature.title}
+              className="feature-item"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.6 + index * 0.1 }}
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="feature-icon">{feature.icon}</div>
+              <h3>{feature.title}</h3>
+              <p>{feature.desc}</p>
+            </motion.div>
+          ))}
+        </motion.div>
 
-        {error && <div className="error-message">{error}</div>}
-        <button 
+        {error && (
+          <motion.div 
+            className="error-message"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            {error}
+          </motion.div>
+        )}
+
+        <motion.button 
           className="connect-button"
           onClick={handleConnect}
           disabled={isLoading}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 1 }}
         >
-          {isLoading ? 'Connecting...' : 'Connect to Meta'}
-        </button>
+          {isLoading ? (
+            <motion.span
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+            >
+              ⚡
+            </motion.span>
+          ) : 'Connect to Meta'}
+        </motion.button>
 
-        <div className="terms">
+        <motion.div 
+          className="terms"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.1 }}
+        >
           <p>
             By connecting, you agree to our{' '}
-            <a href="#terms">Terms of Service</a> • <a href="#privacy">Privacy Policy</a>
+            <motion.a 
+              href="#terms"
+              whileHover={{ scale: 1.05 }}
+            >
+              Terms of Service
+            </motion.a>{' '}
+            •{' '}
+            <motion.a 
+              href="#privacy"
+              whileHover={{ scale: 1.05 }}
+            >
+              Privacy Policy
+            </motion.a>
           </p>
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 
