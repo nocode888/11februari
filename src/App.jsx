@@ -9,15 +9,11 @@ function App() {
     setIsLoggedIn(true);
   };
 
-  return (
-    <>
-      {!isLoggedIn ? (
-        <LoginPage onLogin={handleLogin} />
-      ) : (
-        <MainApp />
-      )}
-    </>
-  );
+  if (!isLoggedIn) {
+    return <LoginPage onLogin={handleLogin} />;
+  }
+
+  return <MainApp />;
 }
 
 export default App; 
